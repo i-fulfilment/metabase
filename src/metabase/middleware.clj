@@ -197,8 +197,7 @@
          strict-transport-security-header
          content-security-policy-header
          #_(public-key-pins-header)
-         {"X-Frame-Options"                   "DENY"          ; Tell browsers not to render our site as an iframe (prevent clickjacking)
-          "X-XSS-Protection"                  "1; mode=block" ; Tell browser to block suspected XSS attacks
+         {"X-XSS-Protection"                  "1; mode=block" ; Tell browser to block suspected XSS attacks
           "X-Permitted-Cross-Domain-Policies" "none"          ; Prevent Flash / PDF files from including content from site.
           "X-Content-Type-Options"            "nosniff"}))    ; Tell browser not to use MIME sniffing to guess types of files -- protect against MIME type confusion attacks
 

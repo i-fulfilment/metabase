@@ -123,19 +123,19 @@ export default class DashboardsDropdown extends Component {
                         <OnClickOutsideWrapper handleDismissal={this.closeDropdown}>
                             <div className="NavDropdown-content DashboardList NavDropdown-content--dashboards">
                                 { dashboards.length === 0 ?
-                                    <div className="NavDropdown-content-layer text-white text-centered">
+                                    <div className="NavDropdown-content-layer text-centered">
                                         <div className="p2"><div style={this.styles.dashIcon} className="ml-auto mr-auto"></div></div>
                                         <div className="px2 py1 text-bold">You don’t have any dashboards yet.</div>
                                         <div className="px2 pb2">Dashboards group visualizations for frequent questions in a single handy place.</div>
                                         <div className="border-top border-light">
-                                            <a className="Dropdown-item block text-white no-decoration" onClick={this.toggleModal}>Create your first dashboard</a>
+                                            <a className="Dropdown-item block no-decoration" onClick={this.toggleModal}>Create your first dashboard</a>
                                         </div>
                                     </div>
                                 :
                                     <ul className="NavDropdown-content-layer">
                                         { dashboards.map(dash =>
                                             <li key={dash.id} className="block">
-                                                <Link to={"/dash/"+dash.id} data-metabase-event={"Navbar;Dashboard Dropdown;Open Dashboard;"+dash.id} className="Dropdown-item block text-white no-decoration" onClick={this.closeDropdown}>
+                                                <Link to={"/dash/"+dash.id} data-metabase-event={"Navbar;Dashboard Dropdown;Open Dashboard;"+dash.id} className="Dropdown-item block no-decoration" onClick={this.closeDropdown}>
                                                     <div className="flex text-bold">
                                                         {dash.name}
                                                     </div>
@@ -148,7 +148,7 @@ export default class DashboardsDropdown extends Component {
                                             </li>
                                         )}
                                         <li className="block border-top border-light">
-                                            <a data-metabase-event={"Navbar;Dashboard Dropdown;Create Dashboard"} className="Dropdown-item block text-white no-decoration" onClick={this.toggleModal}>Create a new dashboard</a>
+                                            <a data-metabase-event={"Navbar;Dashboard Dropdown;Create Dashboard"} className="Dropdown-item block no-decoration" onClick={this.toggleModal}>Create a new dashboard</a>
                                         </li>
                                     </ul>
                                 }

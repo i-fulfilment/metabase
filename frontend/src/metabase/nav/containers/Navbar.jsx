@@ -6,7 +6,6 @@ import { push } from "react-router-redux";
 import { Link } from "react-router";
 
 import Icon from "metabase/components/Icon.jsx";
-import LogoIcon from "metabase/components/LogoIcon.jsx";
 
 import DashboardsDropdown from "metabase/nav/containers/DashboardsDropdown.jsx";
 import ProfileLink from "metabase/nav/components/ProfileLink.jsx";
@@ -94,28 +93,18 @@ export default class Navbar extends Component {
         return (
             <nav className={cx("Nav py2 sm-py1 xl-py3 relative", this.props.className)}>
                 <ul className="wrapper flex align-center">
-                    <li>
-                        <Link to="/" data-metabase-event={"Navbar;Logo"} className="NavItem cursor-pointer flex align-center">
-                            <LogoIcon className="text-brand my2"></LogoIcon>
-                        </Link>
-                    </li>
                 </ul>
             </nav>
         );
     }
-
+ 
     renderMainNav() {
         return (
-            <nav className={cx("Nav CheckBg CheckBg-offset relative bg-brand sm-py2 sm-py1 xl-py3", this.props.className)}>
-                <ul className="pl4 pr1 flex align-center">
-                    <li>
-                        <Link to="/" data-metabase-event={"Navbar;Logo"} className="NavItem cursor-pointer text-white flex align-center my1 transition-background">
-                            <LogoIcon className="text-white m1"></LogoIcon>
-                        </Link>
-                    </li>
+            <nav className={cx("Nav CheckBg CheckBg-offset relative", this.props.className)}>
+                <ul className="flex align-center">
                     <li className="pl3">
                         <DashboardsDropdown {...this.props}>
-                            <a data-metabase-event={"Navbar;Dashboard Dropdown;Toggle"} style={this.styles.navButton} className={cx("NavDropdown-button NavItem text-white text-bold cursor-pointer px2 flex align-center transition-background", {"NavItem--selected": this.isActive("/dash/")})}>
+                            <a data-metabase-event={"Navbar;Dashboard Dropdown;Toggle"} style={this.styles.navButton} className={cx("NavDropdown-button NavItem cursor-pointer px2 flex align-center transition-background", {"NavItem--selected": this.isActive("/dash/")})}>
                                 <span className="NavDropdown-button-layer">
                                     Dashboards
                                     <Icon className="ml1" name={'chevrondown'} size={8}></Icon>
@@ -124,19 +113,16 @@ export default class Navbar extends Component {
                         </DashboardsDropdown>
                     </li>
                     <li className="pl1">
-                        <Link to="/questions/all" data-metabase-event={"Navbar;Questions"} style={this.styles.navButton} className={cx("NavItem cursor-pointer text-white text-bold no-decoration flex align-center px2 transition-background")} activeClassName="NavItem--selected">Questions</Link>
+                        <Link to="/questions/all" data-metabase-event={"Navbar;Questions"} style={this.styles.navButton} className={cx("NavItem cursor-pointer  no-decoration flex align-center px2 transition-background")} activeClassName="NavItem--selected">Questions</Link>
                     </li>
                     <li className="pl1">
-                        <Link to="/pulse" data-metabase-event={"Navbar;Pulses"} style={this.styles.navButton} className={cx("NavItem cursor-pointer text-white text-bold no-decoration flex align-center px2 transition-background")} activeClassName="NavItem--selected">Pulses</Link>
+                        <Link to="/pulse" data-metabase-event={"Navbar;Pulses"} style={this.styles.navButton} className={cx("NavItem cursor-pointer  no-decoration flex align-center px2 transition-background")} activeClassName="NavItem--selected">Pulses</Link>
                     </li>
                     <li className="pl1">
-                        <Link to="/reference/guide" data-metabase-event={"Navbar;DataReference"} style={this.styles.navButton} className={cx("NavItem cursor-pointer text-white text-bold no-decoration flex align-center px2 transition-background")} activeClassName="NavItem--selected">Data Reference</Link>
+                        <Link to="/reference/guide" data-metabase-event={"Navbar;DataReference"} style={this.styles.navButton} className={cx("NavItem cursor-pointer  no-decoration flex align-center px2 transition-background")} activeClassName="NavItem--selected">Data Reference</Link>
                     </li>
                     <li className="pl3">
                         <Link to="/q" data-metabase-event={"Navbar;New Question"} style={this.styles.newQuestion} className="NavNewQuestion rounded inline-block bg-white text-brand text-bold cursor-pointer px2 no-decoration transition-all">New <span className="hide sm-show">Question</span></Link>
-                    </li>
-                    <li className="flex-align-right transition-background">
-                        <div className="inline-block text-white"><ProfileLink {...this.props}></ProfileLink></div>
                     </li>
                 </ul>
             </nav>
