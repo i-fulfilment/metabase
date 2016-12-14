@@ -7,8 +7,8 @@ set -e
 
 # Translate various Heroku environment variables to Metabase equivalents
 
-if [ "$PORT" ]; then
-    export MB_JETTY_PORT="$PORT"
+if [ "$MB_JETTY_PORT" ]; then
+    export MB_JETTY_PORT="$MB_JETTY_PORT"
 fi
 
 # Heroku Postgres
