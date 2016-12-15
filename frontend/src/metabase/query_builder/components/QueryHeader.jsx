@@ -178,27 +178,7 @@ export default class QueryHeader extends Component {
 
         var buttonSections = [];
 
-        // NEW card
-        if (isNew && isDirty) {
-            buttonSections.push([
-                <ModalWithTrigger
-                    key="save"
-                    ref="saveModal"
-                    triggerClasses="h4 text-grey-4 text-brand-hover text-uppercase"
-                    triggerElement="Save"
-                >
-                    <SaveQuestionModal
-                        card={this.props.card}
-                        originalCard={this.props.originalCard}
-                        tableMetadata={this.props.tableMetadata}
-                        addToDashboard={false}
-                        saveFn={this.onSave}
-                        createFn={this.onCreate}
-                        closeFn={() => this.refs.saveModal.toggle()}
-                    />
-                </ModalWithTrigger>
-            ]);
-        }
+  
 
         // parameters
         if (Query.isNative(this.props.query) && database && _.contains(database.features, "native-parameters")) {
