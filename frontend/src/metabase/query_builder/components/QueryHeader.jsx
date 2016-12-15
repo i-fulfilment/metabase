@@ -200,70 +200,6 @@ export default class QueryHeader extends Component {
             ]);
         }
 
-        // persistence buttons on saved cards
-        if (!isNew) {
-            if (!isEditing) {
-                if (this.state.recentlySaved) {
-                    // existing card + not editing + recently saved = save confirmation
-                    buttonSections.push([
-                        <button key="recentlySaved" className="cursor-pointer bg-white text-success text-strong text-uppercase">
-                            <span>
-                                <Icon name='check' size={12} />
-                                <span className="ml1">Saved</span>
-                            </span>
-                        </button>
-                    ]);
-
-                } else {
-                    // edit button
-                    buttonSections.push([
-                        <Tooltip key="edit" tooltip="Edit question">
-                            <a className="cursor-pointer text-brand-hover" onClick={this.onBeginEditing}>
-                                <Icon name="pencil" size={16} />
-                            </a>
-                        </Tooltip>
-                    ]);
-                }
-
-            } else {
-                // save button
-                buttonSections.push([
-                    <ActionButton
-                        key="save"
-                        actionFn={() => this.onSave(this.props.card, false)}
-                        className="cursor-pointer text-brand-hover bg-white text-grey-4 text-uppercase"
-                        normalText="SAVE CHANGES"
-                        activeText="Saving…"
-                        failedText="Save failed"
-                        successText="Saved"
-                    />
-                ]);
-
-                // cancel button
-                buttonSections.push([
-                    <a key="cancel" className="cursor-pointer text-brand-hover text-grey-4 text-uppercase" onClick={this.onCancel}>
-                        CANCEL
-                    </a>
-                ]);
-
-                // delete button
-                buttonSections.push([
-                    <Tooltip key="delete" tooltip="Delete">
-                        <ModalWithTrigger
-                            ref="deleteModal"
-                            triggerElement={<span className="text-brand-hover"><Icon name="trash" size={16} /></span>}
-                        >
-                            <DeleteQuestionModal
-                                card={this.props.card}
-                                deleteCardFn={this.onDelete}
-                                closeFn={() => this.refs.deleteModal.toggle()}
-                            />
-                        </ModalWithTrigger>
-                    </Tooltip>
-                ]);
-            }
-        }
-
         // parameters
         if (Query.isNative(this.props.query) && database && _.contains(database.features, "native-parameters")) {
             const parametersButtonClasses = cx('transition-color', {
@@ -279,78 +215,8 @@ export default class QueryHeader extends Component {
             ]);
         }
 
-        // add to dashboard
-        if (!isNew && !isEditing) {
-            // simply adding an existing saved card to a dashboard, so show the modal to do so
-            buttonSections.push([
-                <Tooltip key="addtodash" tooltip="Add to dashboard">
-                    <span data-metabase-event={"QueryBuilder;AddToDash Modal;normal"} className="cursor-pointer text-brand-hover" onClick={() => this.setState({ modal: "add-to-dashboard" })}>
-                        <Icon name="addtodash" size={16} />
-                    </span>
-                </Tooltip>
-            ]);
-        } else if (isNew && isDirty) {
-            // this is a new card, so we need the user to save first then they can add to dash
-            buttonSections.push([
-                <Tooltip key="addtodashsave" tooltip="Add to dashboard">
-                    <ModalWithTrigger
-                        ref="addToDashSaveModal"
-                        triggerClasses="h4 text-brand-hover text-uppercase"
-                        triggerElement={<span data-metabase-event={"QueryBuilder;AddToDash Modal;pre-save"} className="text-brand-hover"><Icon name="addtodash" size={16} /></span>}
-                    >
-                        <SaveQuestionModal
-                            card={this.props.card}
-                            originalCard={this.props.originalCard}
-                            tableMetadata={this.props.tableMetadata}
-                            addToDashboard={true}
-                            saveFn={this.onSave}
-                            createFn={this.onCreate}
-                            closeFn={() => this.refs.addToDashSaveModal.toggle()}
-                        />
-                    </ModalWithTrigger>
-                </Tooltip>
-            ]);
-        }
 
-        // history icon on saved cards
-        if (!isNew) {
-            buttonSections.push([
-                <Tooltip key="history" tooltip="Revision history">
-                    <ModalWithTrigger
-                        ref="cardHistory"
-                        triggerElement={<span className="text-brand-hover"><Icon name="history" size={18} /></span>}
-                    >
-                        <HistoryModal
-                            revisions={this.state.revisions}
-                            entityType="card"
-                            entityId={this.props.card.id}
-                            onFetchRevisions={this.onFetchRevisions}
-                            onRevertToRevision={this.onRevertToRevision}
-                            onClose={() => this.refs.cardHistory.toggle()}
-                            onReverted={this.onRevertedRevision}
-                        />
-                    </ModalWithTrigger>
-                </Tooltip>
-            ]);
-        }
 
-        // query mode toggle
-        buttonSections.push([
-            <QueryModeButton
-                key="queryModeToggle"
-                mode={this.props.card.dataset_query.type}
-                allowNativeToQuery={isNew && !isDirty}
-                allowQueryToNative={tableMetadata ?
-                    // if a table is selected, only enable if user has native write permissions for THAT database
-                    tableMetadata.db && tableMetadata.db.native_permissions === "write" :
-                    // if no table is selected, only enable if user has native write permissions for ANY database
-                    _.any(databases, (db) => db.native_permissions === "write")
-                }
-                nativeForm={this.props.result && this.props.result.data && this.props.result.data.native_form}
-                onSetMode={this.props.setQueryModeFn}
-                tableMetadata={tableMetadata}
-            />
-        ]);
 
         // data reference button
         var dataReferenceButtonClasses = cx('mr1 transition-color', {
@@ -379,7 +245,7 @@ export default class QueryHeader extends Component {
             <div>
                 <HeaderBar
                     isEditing={this.props.isEditing}
-                    name={this.props.isNew ? "New question" : this.props.card.name}
+                    name={this.props.isNew ? "Explore Your Data" : this.props.card.name}
                     description={this.props.card ? this.props.card.description : null}
                     breadcrumb={(!this.props.card.id && this.props.originalCard) ? (<span className="pl2">started from <a className="link" onClick={this.onFollowBreadcrumb}>{this.props.originalCard.name}</a></span>) : null }
                     buttons={this.getHeaderButtons()}

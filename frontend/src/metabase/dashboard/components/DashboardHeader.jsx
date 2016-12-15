@@ -187,40 +187,7 @@ export default class DashboardHeader extends Component {
             );
         }
 
-        if (!isFullscreen && !isEditing && canEdit) {
-            buttons.push(
-                <Tooltip tooltip="Edit Dashboard">
-                    <a data-metabase-event="Dashboard;Edit" key="edit" title="Edit Dashboard Layout" className="text-brand-hover cursor-pointer" onClick={() => this.onEdit()}>
-                        <Icon name="pencil" size={16} />
-                    </a>
-                </Tooltip>
-            );
-        }
 
-        if (!isFullscreen && canEdit) {
-            buttons.push(
-                <ModalWithTrigger
-                    key="add"
-                    ref="addQuestionModal"
-                    triggerElement={
-                        <Tooltip tooltip="Add Card">
-                            <span data-metabase-event="Dashboard;Add Card Modal" title="Add a question to this dashboard">
-                                <Icon className={cx("text-brand-hover cursor-pointer", { "Icon--pulse": isEmpty })} name="add" size={16} />
-                            </span>
-                        </Tooltip>
-                    }
-                >
-                    <AddToDashSelectQuestionModal
-                        dashboard={dashboard}
-                        cards={this.props.cards}
-                        fetchCards={this.props.fetchCards}
-                        addCardToDashboard={this.props.addCardToDashboard}
-                        onEditingChange={this.props.onEditingChange}
-                        onClose={() => this.refs.addQuestionModal.toggle()}
-                    />
-                </ModalWithTrigger>
-            );
-        }
 
         if (!isEditing && !isEmpty) {
             buttons.push(
