@@ -106,23 +106,17 @@ export default class Navbar extends Component {
                         <DashboardsDropdown {...this.props}>
                             <a data-metabase-event={"Navbar;Dashboard Dropdown;Toggle"} style={this.styles.navButton} className={cx("NavDropdown-button NavItem cursor-pointer px2 flex align-center transition-background", {"NavItem--selected": this.isActive("/dash/")})}>
                                 <span className="NavDropdown-button-layer">
-                                    Dashboards
+                                    Reports
                                     <Icon className="ml1" name={'chevrondown'} size={8}></Icon>
                                 </span>
                             </a>
                         </DashboardsDropdown>
                     </li>
                     <li className="pl1">
-                        <Link to="/questions/all" data-metabase-event={"Navbar;Questions"} style={this.styles.navButton} className={cx("NavItem cursor-pointer  no-decoration flex align-center px2 transition-background")} activeClassName="NavItem--selected">Questions</Link>
-                    </li>
-                    <li className="pl1">
-                        <Link to="/pulse" data-metabase-event={"Navbar;Pulses"} style={this.styles.navButton} className={cx("NavItem cursor-pointer  no-decoration flex align-center px2 transition-background")} activeClassName="NavItem--selected">Pulses</Link>
-                    </li>
-                    <li className="pl1">
-                        <Link to="/reference/guide" data-metabase-event={"Navbar;DataReference"} style={this.styles.navButton} className={cx("NavItem cursor-pointer  no-decoration flex align-center px2 transition-background")} activeClassName="NavItem--selected">Data Reference</Link>
+                        <Link to="/pulse" data-metabase-event={"Navbar;Pulses"} style={this.styles.navButton} className={cx("NavItem cursor-pointer  no-decoration flex align-center px2 transition-background")} activeClassName="NavItem--selected">Notifications</Link>
                     </li>
                     <li className="pl3">
-                        <Link to="/q" data-metabase-event={"Navbar;New Question"} style={this.styles.newQuestion} className="NavNewQuestion rounded inline-block bg-white text-brand text-bold cursor-pointer px2 no-decoration transition-all">New <span className="hide sm-show">Question</span></Link>
+                        <Link to="/q" data-metabase-event={"Navbar;New Question"} style={this.styles.newQuestion} className="NavItem inline-block cursor-pointer px2 no-decoration transition-all">New <span className="hide sm-show">Explore Your Data</span></Link>
                     </li>
                 </ul>
             </nav>
