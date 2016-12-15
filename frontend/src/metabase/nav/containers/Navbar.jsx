@@ -113,10 +113,10 @@ export default class Navbar extends Component {
                         </DashboardsDropdown>
                     </li>
                     <li className="pl1">
-                        <Link to="/pulse" data-metabase-event={"Navbar;Pulses"} style={this.styles.navButton} className={cx("NavItem cursor-pointer  no-decoration flex align-center px2 transition-background")} activeClassName="NavItem--selected">Notifications</Link>
+                        <Link to="/pulse" data-metabase-event={"Navbar;Pulses"} style={this.styles.navButton} className={cx("NavItem cursor-pointer  no-decoration flex align-center px2 transition-background")} activeClassName="NavItem--selected">Pulses</Link>
                     </li>
                     <li className="pl3">
-                        <Link to="/q" data-metabase-event={"Navbar;New Question"} style={this.styles.newQuestion} className="NavItem inline-block cursor-pointer px2 no-decoration transition-all">New <span className="hide sm-show">Explore Your Data</span></Link>
+                        <Link to="/q" data-metabase-event={"Navbar;New Question"} style={this.styles.newQuestion} className="NavItem inline-block cursor-pointer px2 no-decoration transition-all"><span className="hide sm-show">Explore Your Data</span></Link>
                     </li>
                 </ul>
             </nav>

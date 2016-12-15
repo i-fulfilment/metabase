@@ -327,7 +327,7 @@ export default class Dashboard extends Component {
         );
 
         return (
-            <LoadingAndErrorWrapper style={{ minHeight: "100%" }} className={cx("Dashboard flex-full", { "Dashboard--fullscreen": isFullscreen, "Dashboard--night": isNightMode})} loading={!dashboard} error={error}>
+            <LoadingAndErrorWrapper style={{ overflow: "auto" }} className={cx("Dashboard flex-full", { "Dashboard--fullscreen": isFullscreen, "Dashboard--night": isNightMode})} loading={!dashboard} error={error}>
             {() =>
                 <div className="full" style={{ overflowX: "hidden" }}>
                     <header className="DashboardHeader relative z2">
