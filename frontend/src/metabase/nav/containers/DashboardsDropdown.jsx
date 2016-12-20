@@ -127,9 +127,6 @@ export default class DashboardsDropdown extends Component {
                                         <div className="p2"><div style={this.styles.dashIcon} className="ml-auto mr-auto"></div></div>
                                         <div className="px2 py1 text-bold">You don’t have any dashboards yet.</div>
                                         <div className="px2 pb2">Dashboards group visualizations for frequent questions in a single handy place.</div>
-                                        <div className="border-top border-light">
-                                            <a className="Dropdown-item block no-decoration" onClick={this.toggleModal}>Create your first dashboard</a>
-                                        </div>
                                     </div>
                                 :
                                     <ul className="NavDropdown-content-layer">
