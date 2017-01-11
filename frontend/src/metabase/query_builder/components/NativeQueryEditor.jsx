@@ -85,6 +85,20 @@ export default class NativeQueryEditor extends Component {
     }
 
     componentDidUpdate() {
+        const { modeInfo } = this.state;
+
+        let editorElement = ReactDOM.findDOMNode(this.refs.editor);
+        let editor = ace.edit(editorElement);
+        if (editor.getValue() !== this.props.query.native.query) {
+            // This is a weird hack, but the purpose is to avoid an infinite loop caused by the fact that calling editor.setValue()
+            // will trigger the editor 'change' event, update the query, and cause another rendering loop which we don't want, so
+            // we need a way to update the editor without causing the onChange event to go through as well
+            this.localUpdate = true;
+            editor.setValue(this.props.query.native.query);
+            editor.clearSelection();
+            this.localUpdate = false;
+        }
+
         
     }
 
