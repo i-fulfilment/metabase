@@ -1,9 +1,8 @@
 .Nav {
-    z-index: 3;
+    z-index: 4;
     background:#f4f5f7;
     border-bottom:1px solid #cbcaca;
-} 
-
+}
 
 .CheckBg-offset {
   background-position-y: -15px;

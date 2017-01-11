@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from "react";
+import { Link } from "react-router";
 
 import QueryModeButton from "./QueryModeButton.jsx";
 
@@ -12,14 +13,17 @@ import Icon from "metabase/components/Icon.jsx";
 import Modal from "metabase/components/Modal.jsx";
 import ModalWithTrigger from "metabase/components/ModalWithTrigger.jsx";
 import QuestionSavedModal from 'metabase/components/QuestionSavedModal.jsx';
-import SaveQuestionModal from 'metabase/components/SaveQuestionModal.jsx';
 import Tooltip from "metabase/components/Tooltip.jsx";
+import MoveToCollection from "metabase/questions/containers/MoveToCollection.jsx";
+
+import SaveQuestionModal from 'metabase/containers/SaveQuestionModal.jsx';
 
 import { CardApi, RevisionApi } from "metabase/services";
 
 import MetabaseAnalytics from "metabase/lib/analytics";
 import Query from "metabase/lib/query";
 import { cancelable } from "metabase/lib/promise";
+import Urls from "metabase/lib/urls";
 
 import cx from "classnames";
 import _ from "underscore";
@@ -178,7 +182,6 @@ export default class QueryHeader extends Component {
 
         var buttonSections = [];
 
-  
 
         // parameters
         if (Query.isNative(this.props.query) && database && _.contains(database.features, "native-parameters")) {
@@ -194,9 +197,6 @@ export default class QueryHeader extends Component {
                 </Tooltip>
             ]);
         }
-
-
-
 
         // data reference button
         var dataReferenceButtonClasses = cx('mr1 transition-color', {
@@ -222,7 +222,7 @@ export default class QueryHeader extends Component {
 
     render() {
         return (
-            <div>
+            <div className="relative">
                 <HeaderBar
                     isEditing={this.props.isEditing}
                     name={this.props.isNew ? "Explore Your Data" : this.props.card.name}
@@ -230,19 +230,29 @@ export default class QueryHeader extends Component {
                     breadcrumb={(!this.props.card.id && this.props.originalCard) ? (<span className="pl2">started from <a className="link" onClick={this.onFollowBreadcrumb}>{this.props.originalCard.name}</a></span>) : null }
                     buttons={this.getHeaderButtons()}
                     setItemAttributeFn={this.props.onSetCardAttribute}
+                    badge={this.props.card.collection &&
+                        <Link
+                            to={Urls.collection(this.props.card.collection)}
+                            className="text-uppercase flex align-center no-decoration"
+                            style={{ color: this.props.card.collection.color, fontSize: 12 }}
+                        >
+                            <Icon name="collection" size={12} style={{ marginRight: "0.5em" }} />
+                            {this.props.card.collection.name}
+                        </Link>
+                    }
                 />
 
-                <Modal className="Modal Modal--small" isOpen={this.state.modal === "saved"} onClose={this.onCloseModal}>
+                <Modal small isOpen={this.state.modal === "saved"} onClose={this.onCloseModal}>
                     <QuestionSavedModal
                         addToDashboardFn={() => this.setState({ modal: "add-to-dashboard" })}
-                        closeFn={this.onCloseModal}
+                        onClose={this.onCloseModal}
                     />
                 </Modal>
 
                 <Modal isOpen={this.state.modal === "add-to-dashboard"} onClose={this.onCloseModal}>
                     <AddToDashSelectDashModal
                         card={this.props.card}
-                        closeFn={this.onCloseModal}
+                        onClose={this.onCloseModal}
                         onChangeLocation={this.props.onChangeLocation}
                     />
                 </Modal>

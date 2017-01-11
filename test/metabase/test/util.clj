@@ -5,6 +5,7 @@
             [expectations :refer :all]
             [metabase.db :as db]
             (metabase.models [card :refer [Card]]
+                             [collection :refer [Collection]]
                              [dashboard :refer [Dashboard]]
                              [database :refer [Database]]
                              [field :refer [Field]]
@@ -88,16 +89,19 @@
                  [k (f v)])))))
 
 
+(defn- user-id [username]
+  (require 'metabase.test.data.users)
+  ((resolve 'metabase.test.data.users/user->id) username))
+
+(defn- rasta-id     [] (user-id :rasta))
+
+
 (defprotocol ^:private WithTempDefaults
   (^:private with-temp-defaults [this]))
 
 (u/strict-extend Object
   WithTempDefaults
   {:with-temp-defaults (constantly {})})
-
-(defn- rasta-id []
-  (require 'metabase.test.data.users)
-  ((resolve 'metabase.test.data.users/user->id) :rasta))
 
 (u/strict-extend (class Card)
   WithTempDefaults
@@ -106,6 +110,11 @@
                                 :display                :table
                                 :name                   (random-name)
                                 :visualization_settings {}})})
+
+(u/strict-extend (class Collection)
+  WithTempDefaults
+  {:with-temp-defaults (fn [_] {:name  (random-name)
+                                :color "#ABCDEF"})})
 
 (u/strict-extend (class Dashboard)
   WithTempDefaults
