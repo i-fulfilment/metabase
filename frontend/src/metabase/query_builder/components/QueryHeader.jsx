@@ -204,9 +204,7 @@ export default class QueryHeader extends Component {
                     breadcrumb={(!this.props.card.id && this.props.originalCard) ? null : null }
                     buttons={this.getHeaderButtons()}
                     setItemAttributeFn={this.props.onSetCardAttribute}
-                    badge={this.props.card.collection &&
-
-                    }
+                    badge={null}
                 />
 
                 <Modal small isOpen={this.state.modal === "saved"} onClose={this.onCloseModal}>
