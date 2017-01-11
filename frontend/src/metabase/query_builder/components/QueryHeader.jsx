@@ -183,33 +183,7 @@ export default class QueryHeader extends Component {
         var buttonSections = [];
 
 
-        // parameters
-        if (Query.isNative(this.props.query) && database && _.contains(database.features, "native-parameters")) {
-            const parametersButtonClasses = cx('transition-color', {
-                'text-brand': this.props.uiControls.isShowingTemplateTagsEditor,
-                'text-brand-hover': !this.props.uiControls.isShowingTemplateTagsEditor
-            });
-            buttonSections.push([
-                <Tooltip key="parameterEdititor" tooltip="Variables">
-                    <a className={parametersButtonClasses}>
-                        <Icon name="variable" size={16} onClick={this.props.toggleTemplateTagsEditor}></Icon>
-                    </a>
-                </Tooltip>
-            ]);
-        }
-
-        // data reference button
-        var dataReferenceButtonClasses = cx('mr1 transition-color', {
-            'text-brand': this.props.isShowingDataReference,
-            'text-brand-hover': !this.state.isShowingDataReference
-        });
-        buttonSections.push([
-            <Tooltip key="dataReference" tooltip="Learn about your data">
-                <a className={dataReferenceButtonClasses}>
-                    <Icon name='reference' size={16} onClick={this.onToggleDataReference}></Icon>
-                </a>
-            </Tooltip>
-        ]);
+        
 
         return (
             <ButtonBar buttons={buttonSections} className="Header-buttonSection borderless" />
@@ -231,14 +205,7 @@ export default class QueryHeader extends Component {
                     buttons={this.getHeaderButtons()}
                     setItemAttributeFn={this.props.onSetCardAttribute}
                     badge={this.props.card.collection &&
-                        <Link
-                            to={Urls.collection(this.props.card.collection)}
-                            className="text-uppercase flex align-center no-decoration"
-                            style={{ color: this.props.card.collection.color, fontSize: 12 }}
-                        >
-                            <Icon name="collection" size={12} style={{ marginRight: "0.5em" }} />
-                            {this.props.card.collection.name}
-                        </Link>
+
                     }
                 />
 

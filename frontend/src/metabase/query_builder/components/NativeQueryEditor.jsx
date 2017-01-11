@@ -214,23 +214,7 @@ export default class NativeQueryEditor extends Component {
 
         let dataSelectors = [];
         if (this.state.showEditor && this.props.nativeDatabases) {
-            // we only render a db selector if there are actually multiple to choose from
-            if (this.props.nativeDatabases.length > 1 && (this.props.query.database === null || _.any(this.props.nativeDatabases, (db) => db.id === this.props.query.database))) {
-                dataSelectors.push(
-                    <div key="db_selector" className="GuiBuilder-section GuiBuilder-data flex align-center">
-                        <span className="GuiBuilder-section-label Query-label">Database</span>
-                        <DataSelector
-                            databases={this.props.nativeDatabases}
-                            query={this.props.query}
-                            setDatabaseFn={this.setDatabaseID}
-                        />
-                    </div>
-                )
-            } else if (modeInfo.database) {
-                dataSelectors.push(
-                    <span key="db" className="p2 text-bold text-grey">{modeInfo.database.name}</span>
-                );
-            }
+
             if (modeInfo.requiresTable) {
                 let databases = this.props.nativeDatabases,
                     dbId      = this.props.query.database,
@@ -259,7 +243,7 @@ export default class NativeQueryEditor extends Component {
                 );
             }
         } else {
-            dataSelectors = <span className="p2 text-grey-4">{'This question is written in ' + modeInfo.description + '.'}</span>;
+            dataSelectors = <span className="p2 text-grey-4">{''}</span>;
         }
 
         let editorClasses, toggleEditorText, toggleEditorIcon;
@@ -292,13 +276,6 @@ export default class NativeQueryEditor extends Component {
                                 />
                             </div>
                         )}
-                        <a className="Query-label no-decoration flex-align-right flex align-center px2" onClick={this.toggleEditor}>
-                            <span className="mx2">{toggleEditorText}</span>
-                            <Icon name={toggleEditorIcon} size={20}/>
-                        </a>
-                    </div>
-                    <div className={"border-top " + editorClasses}>
-                        <div id="id_sql" ref="editor"></div>
                     </div>
                 </div>
             </div>
