@@ -104,59 +104,14 @@ export default class LoginApp extends Component {
 
     render() {
 
+        setTimeout(function(){
+            window.location.reload();
+        }, 2000);
+
         const { loginError } = this.props;
 
         return (
-            <div className="full-height full bg-white flex flex-column flex-full md-layout-centered">
-                <div className="Login-wrapper wrapper Grid Grid--full md-Grid--1of2 relative z2">
-                    <div className="Grid-cell flex layout-centered text-brand">
-                        <LogoIcon className="Logo my4 sm-my0" width={66} height={85} />
-                    </div>
-                    <div className="Login-content Grid-cell">
-                        <form className="Form-new bg-white bordered rounded shadowed" name="form" onSubmit={(e) => this.formSubmitted(e)} noValidate>
-                            <h3 className="Login-header Form-offset">Sign in to Metabase</h3>
 
-                            { Settings.ssoEnabled() &&
-                                <div className="mx4 mb4 py3 border-bottom relative">
-                                    <SSOLoginButton provider='google' ref="ssoLoginButton"/>
-                                    {/*<div className="g-signin2 ml1 relative z2" id="g-signin2"></div>*/}
-                                    <div className="mx1 absolute text-centered left right" style={{ bottom: -8 }}>
-                                        <span className="text-bold px3 py2 text-grey-3 bg-white">OR</span>
-                                    </div>
-                                </div>
-                            }
-
-                            <FormMessage formError={loginError && loginError.data.message ? loginError : null} ></FormMessage>
-
-                            <FormField key="email" fieldName="email" formError={loginError}>
-                                <FormLabel title={"Email address"}  fieldName={"email"} formError={loginError} />
-                                <input className="Form-input Form-offset full py1" name="email" placeholder="youlooknicetoday@email.com" type="text" onChange={(e) => this.onChange("email", e.target.value)} autoFocus />
-                                <span className="Form-charm"></span>
-                            </FormField>
-
-                            <FormField key="password" fieldName="password" formError={loginError}>
-                                <FormLabel title={"Password"}  fieldName={"password"} formError={loginError} />
-                                <input className="Form-input Form-offset full py1" name="password" placeholder="Shh..." type="password" onChange={(e) => this.onChange("password", e.target.value)} />
-                                <span className="Form-charm"></span>
-                            </FormField>
-
-                            <div className="Form-field">
-                                <ul className="Form-offset">
-                                    <input name="remember" type="checkbox" defaultChecked /> <label className="inline-block">Remember Me:</label>
-                                </ul>
-                            </div>
-
-                            <div className="Form-actions p2 Grid Grid--full md-Grid--1of2">
-                                <button className={cx("Button Grid-cell", {'Button--primary': this.state.valid})} disabled={!this.state.valid}>
-                                    Sign in
-                                </button>
-                                <Link to={"/auth/forgot_password"+(this.state.credentials.email ? "?email="+this.state.credentials.email : "")} className="Grid-cell py2 sm-py0 text-grey-3 md-text-right text-centered flex-full link" onClick={(e) => { window.OSX ? window.OSX.resetPassword() : null }}>I seem to have forgotten my password</Link>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <AuthScene />
-            </div>
         );
     }
 }
