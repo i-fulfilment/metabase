@@ -18,6 +18,8 @@ import { SessionApi } from "metabase/services";
 export const login = createThunkAction("AUTH_LOGIN", function(credentials, redirectUrl) {
     return async function(dispatch, getState) {
 
+        return {'data': {'errors': {'email': "LOGIN IS DISABLED."}}};
+
         if (!MetabaseUtils.validEmail(credentials.email)) {
             return {'data': {'errors': {'email': "Please enter a valid formatted email address."}}};
         }
