@@ -104,8 +104,6 @@ export default class LoginApp extends Component {
 
     render() {
 
-        window.location.reload();
-
         const { loginError } = this.props;
 
         return (
